@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme{
+    /* --color-mint-500: oklch(0.72 0.11 178); */
+    /*--color-green-app: #8BC34A; */
+    /*--color-white-app: #F5F5F5; */
+    /*--color-gray-app: #424242; */
+
+    --font-montserrat: "Montserrat", sans-serif;
+}
+
+@layer base {
+  /* Gemini saved my life fixing this stuff */
+  input[type="number"]::-webkit-inner-spin-button, 
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Para o Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}

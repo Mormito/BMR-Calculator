@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A calculator designed to help people get healthier">
+    <meta name="author" content="Guilherme Mormito">
+    <meta name="keywords" content="BMR, Calculator, Diet, Calories">
+
+    <link href="./css/output.css" rel="stylesheet">
+    <title>BMR Calculator</title>
+</head>
+
+<body class="bg-grey-100 font-montserrat">
+
+    <div class="w-full h-full flex flex-col md:flex-row justify-center items-center md:items-stretch align-middle p-2 md:p-10 gap-5 md:gap-7 mt-5">
+        
+        <!--Calculator Forms-->
+        <form id="bmr-form" class="bg-white border border-gray-200 shadow-lg flex flex-col rounded-3xl w-9/10 h-full md:w-2/9 align-middle items-center lg:p-10 gap-2 lg:gap-3">
+
+            <h1 class="text-2xl lg:text-3xl font-bold text-gray-800 pb-3 pt-5 lg:pb-4 lg:pt-0">BMR CALCULATOR</h1>
+
+            <input type="number" step="0.1" id="weight" placeholder="Weight (kg)" required class="bg-white border border-gray-200 rounded-md outline-none w-3/4 h-9 lg:w-full lg:h-10 pl-3 max-w-sm">
+            <input type="number" step="0.1" id="height" placeholder="Height (cm)" required class="bg-white border border-gray-200 rounded-md outline-none w-3/4 h-9 lg:w-full lg:h-10 pl-3 max-w-sm">
+            
+            <select id="gender" required class="bg-white border border-gray-200 rounded-md outline-none w-3/4 h-9 lg:w-full lg:h-10 pl-3 max-w-sm">
+                <option value="male">Male ♂️</option>
+                <option value="female">Female ♀️</option>
+            </select>
+
+            <input type="number" id="age" placeholder="Age (Years)" required class="bg-white border border-gray-200 rounded-md outline-none w-3/4 h-9 lg:w-full lg:h-10 max-w-sm pl-3">
+
+            <select id="formula" required class="bg-white border border-gray-200 rounded-md outline-none w-3/4 h-9 lg:w-full lg:h-10 pl-3 max-w-sm">
+                <option value="mifflin">Mifflin-St Jeor</option>
+                <option value="harris">Harris-Benedict</option>
+            </select>
+
+            <select id="intensity" required class="bg-white border border-gray-200 rounded-md outline-none w-3/4 h-9 lg:w-full lg:h-10 pl-3 max-w-sm">
+                <option value="none">Sedentary (None)</option>
+                <option value="low">Low (1-3 times/week)</option>
+                <option value="medium">Medium (3-5 times/week)</option>
+                <option value="high">High (6-7 times/week)</option>
+                <option value="physical_job">Physical Job</option>
+            </select>
+
+            <div class="flex flex-row justify-center items-center gap-2 w-full p-4 font-bold lg:gap-3">
+              <input type="submit" value="Submit" class="text-white bg-green-500 cursor-pointer w-2/5 lg:w-1/3 py-2 rounded-lg duration-75 hover:bg-green-400 outline-none">
+              <input type="button" value="Clear" class="text-white bg-red-500 cursor-pointer w-2/5 lg:w-1/3 py-2 rounded-lg duration-75 hover:bg-red-400 outline-none">
+            </div>
+        </form>
+
+
+        <!--Table-->
+        <div class="bg-white border border-gray-200 shadow-lg rounded-3xl w-11/12 md:w-5/12 overflow-hidden p-4 md:p-6">
+            <table class="text-gray-900 w-full">
+                <thead class="border-b border-gray-400">
+                    <tr>
+                        <th class="text-left p-3 text-gray-900">Diet Model</th><th class="text-right text-gray-900">Expenditure (Kcal)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-left p-3 text-black border-b border-gray-100">BMR</td><td id="bmrResult" class="text-right text-black border-b border-gray-100">Value</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left p-3 text-red-500 border-b border-gray-100">Agressive Cutting</td><td id="aggressive_cutting" class="text-right text-red-500 border-b border-gray-100">Value</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left p-3 text-red-500 border-b border-gray-100">Cutting</td><td id="cutting" class="text-right text-red-500 border-b border-gray-100">Value</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left p-3 text-red-500 border-b border-gray-100">Light Cutting</td><td id="light_cutting" class="text-right text-red-500 border-b border-gray-100">Value</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left p-3 text-green-500 border-b border-gray-100">TDEE (Maintence)</td><td id="tdeeResult" class="text-right text-green-500 font-bold border-b border-gray-100">Value</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left p-3 text-blue-500 border-b border-gray-100">Light Bulking</td><td id="light_bulking" class="text-right text-blue-500 border-b border-gray-100">Value</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left p-3 text-blue-500 border-b border-gray-100">Bulking</td><td id="bulking" class="text-right text-blue-500 border-b border-gray-100">Value</td>
+                    </tr>   
+                    <tr>
+                        <td class="text-left p-3 text-blue-500 border-b border-gray-100">Agressive Bulking</td><td id="aggressive_bulking" class="text-right text-blue-500 border-b border-gray-100">Value</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    
+    <div class="flex flex-col md:flex-row align-middle justify-center items-center">
+         <div class="w-full lg:w-7/8 h-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch align-middle p-2 gap-5 md:gap-7 md:p-10">
+
+            <section class="text-gray-900 bg-white border border-gray-200 justify-center align-middle items-center shadow-lg rounded-3xl w-11/12 lg:w-4/11 p-4">
+                <p class="text-md md:text-lg font-bold text-gray-800">Mifflin-St Jeor Equation</p>
+                <p class="ml-2">Male → BMR = 10W + 6.25H - 5A + 5</p>
+                <p class="ml-2">Female → BMR = 10W + 6.25H - 5A - 161</p><br />
+                <p class="text-md md:text-lg font-bold text-gray-800">Revised Harris-Benedict Equation</p>
+                <p class="ml-2">Male → BMR = 13.397W + 4.799H - 5.677A + 88.362</p>
+                <p class="ml-2">Female → BMR = 9.247W + 3.098H - 4.330A + 447.593</p> <br />
+                <p class="ml-2 text-sm">W is body weight in kg | H is body height in cm | A is age.</p><br />
+                <p class="text-md md:text-lg font-bold text-gray-800">Cutting and Bulking</p>
+
+                <section class="flex flex-col md:flex-row gap-3 md:gap-7 ">
+                    <section class="p-2">
+                        <p class="ml-2">Light Cutting: TDEE-300</p>
+                        <p class="ml-2">Cutting: TDEE-500</p>
+                        <p class="ml-2">Aggressive Cutting: TDEE-750</p>
+                    </section>
+                    <section class="p-2">
+                        <p class="ml-2">Light Bulking: TDEE+300</p>
+                        <p class="ml-2">Bulking: TDEE+500</p>
+                        <p class="ml-2">Aggressive Bulking: TDEE+750</p>
+                    </section>
+                </section>
+                <br />
+
+                <p class="text-md md:text-lg font-bold text-gray-800">Reference:</p>
+                <div class="flex flex-row">
+                    <a class="ml-2 text-sky-400 underline" href="https://www.calculator.net/bmr-calculator.html" target="_blank">calculator.net</a>
+                    <a class="ml-2 text-sky-400 underline" href="https://www.gravitus.com/tools/" target="_blank">gravitus.com</a>
+                </div>
+            </section>
+
+            <section class="text-gray-900 bg-white border border-gray-200 shadow-lg rounded-3xl w-11/12 lg:w-4/11 p-4">
+                <p>BMR - This is the amount of energy (calories) your body needs to maintain basic life-sustaining functions while at rest, such as breathing, circulation, and cell production.</p> <br />
+                <p>TDEE - <b>T</b>otal <b>D</b>aily <b>E</b>nergy <b>E</b>xpenditure. This is the total number of calories your body burns in a day, including physical activity. It represents the caloric intake needed to maintain your current weight.</p> <br />
+                <p>Cutting - A diet model to lose weight, reducing body fat and keeping muscle mass.</p> <br />
+                <p>Bulking - A diet model to gain weight and build muscle mass.</p> <br />
+                <p>Light and Aggressive - Represents how much intense is the diet.</p> <br />
+                <p class="text-xs text-red-600 mt-2">Disclaimer: Aggressive cutting results in massive weight <b>loss</b>, but it's really important to be aware of side effects, you will lose body fat <b>AND</b> muscle mass, because your body is literally trying to survive. An aggressive bulking (popular as "dirty bulk") results in massive weight <b>gain</b>, you will build muscles, but the biggest side effect is a big increase in your body fat.</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="./js/script.js" type="module"></script>
+</body>
+</html>
